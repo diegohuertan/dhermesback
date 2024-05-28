@@ -1,19 +1,21 @@
 const mongoose = require('mongoose');
+const { NUMBER } = require('sequelize');
 
 const medicamentoSchema = new mongoose.Schema({
+    id: Number,
     nombre: String,
     cantidad: Number,
     tipo: String,
+    fechaIngreso: String,
     fechaVencimiento: String,
+    estado: String,
 });
 
 const tratamientoSchema = new mongoose.Schema({
     diagnostico: String,
-    descripcion: String,
-    fechaInicio: String,
-    fechaTermino: String,
-    medicamentos: [{type: mongoose.Schema.Types.ObjectId, ref: 'Medicamento'}],
-    observaciones: String,
+    codigo: Number,
+    duracion: String,
+    ultimaActualizacion: String,
 });
 
 const voluntarioSchema = new mongoose.Schema({

@@ -34,3 +34,34 @@ exports.uploadImage = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+async function uploadPDFToFirebase(file, filename) {
+    const pdfRef = ref(storage, `pdfs/${filename}`);
+    // Sube el archivo PDF a Firebase Storage
+    await uploadBytes(pdfRef, file.buffer);
+    console.log(`PDF subido exitosamente a ${storage.bucket}/pdfs/${filename}`);
+}
+
+exports.uploadPDF = async (req, res) => {
+    console.log("Request body:", req.body); // Muestra el cuerpo de la solicitud
+    console.log("Request files:", req.files); // Muestra todos los archivos en la solicitud
+    console.log("Request file:", req.file); // Muestra el archivo específico (si se espera uno)
+
+    try {
+        if (!req.file) {
+            console.log("No PDF file uploaded with the request."); // Confirma si realmente no se subió un archivo PDF
+            res.status(400).json({ error: 'No PDF file uploaded' });
+            return;
+        }
+        // Usa el nombre del PDF del parámetro de ruta o genera un nombre único
+        const filename = req.params.pdfName || uuidv4();
+        console.log(`Filename determined for upload: ${filename}`); // Muestra el nombre de archivo determinado para la subida
+
+        await uploadPDFToFirebase(req.file, filename);
+        console.log(`PDF uploaded successfully to ${storage.bucket}/pdfs/${filename}`); // Confirma la subida exitosa
+        res.status(201).json({ message: `PDF subido exitosamente a ${storage.bucket}/pdfs/${filename}` });
+    } catch (error) {
+        console.error("Error uploading PDF:", error); // Muestra el error si la subida falla
+        res.status(500).json({ error: error.message });
+    }
+};

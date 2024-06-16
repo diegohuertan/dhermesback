@@ -7,7 +7,9 @@ const perroController = require('../controllers/PerroController');
 const VoluntarioController = require('../controllers/VoluntarioController');
 const MedicamentoController = require('../controllers/MedicamentoController');
 const TratamientoController = require('../controllers/TratamientoController');
-const {uploadImage} = require('../controllers/firebaseStorageController')
+const {uploadImage} = require('../controllers/firebaseStorageController');
+const {uploadPDF} = require('../controllers/firebaseStorageController');
+
 router.get('/perros', perroController.getPerros);
 router.post('/agregarperro', perroController.createPerro);
 router.post('/filtrarId', perroController.filterbyidPerros);
@@ -27,5 +29,5 @@ router.get('/tratamientos', TratamientoController.getTratamiento);
 router.post('/filtraridperros', TratamientoController.filterbyidperros);
 
 router.post('/uploadImage/:imageName', upload.single('image'), uploadImage);
-
+router.post('/uploadPDF/:pdfName', upload.single('pdf'), uploadPDF);
 module.exports = router;

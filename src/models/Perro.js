@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { NUMBER } = require('sequelize');
 
 const medicamentoSchema = new mongoose.Schema({
     id: Number,

@@ -7,8 +7,7 @@ const perroController = require('../controllers/PerroController');
 const VoluntarioController = require('../controllers/VoluntarioController');
 const MedicamentoController = require('../controllers/MedicamentoController');
 const TratamientoController = require('../controllers/TratamientoController');
-const {uploadImage} = require('../controllers/awsbucketController');
-
+const {uploadImage} = require('../controllers/firebaseStorageController')
 router.get('/perros', perroController.getPerros);
 router.post('/agregarperro', perroController.createPerro);
 router.post('/filtrarId', perroController.filterbyidPerros);

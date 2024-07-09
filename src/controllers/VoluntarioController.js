@@ -16,6 +16,7 @@ exports.createVoluntario = async (req, res) => {
 }
 
 exports.validarUser = async (req, res) => {
+    console.log(req.body);
     const { correo, contraseña } = req.body;
 
     try {
@@ -26,7 +27,6 @@ exports.validarUser = async (req, res) => {
         }
 
         const isMatch = await bcrypt.compare(contraseña, usuario.contraseña);
-
         if (!isMatch) {
             return res.status(401).json({ message: 'Credenciales inválidas' });
         }

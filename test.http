@@ -1,0 +1,23 @@
+###
+POST http://localhost:3000/api/validarsesion
+Content-Type: application/json
+
+{
+    "correo": "diego.huertan@alumnos.uv.cl",
+    "contraseña": "diego123"
+}
+###
+GET http://localhost:3000/api/perros
+Content-Type: application/json
+
+###
+POST http://localhost:3000/api/filtrarId
+Content-Type: application/json
+
+{
+    "id": "65b18c06203680dc64febb51"
+}
+
+###
+GET http://localhost:3000/api/medicamentos
+Content-Type: application/json
